@@ -2,17 +2,17 @@
 
 > 基于 Modern.js 和 Material-UI 的 React 应用模版
 
-## Setup
+## 启动
 
-Install the dependencies:
+安装依赖:
 
 ```bash
 pnpm install
 ```
 
-## Get Started
+## 快速开始
 
-Start the dev server:
+在 Dev 模式下运行:
 
 ```bash
 pnpm dev
