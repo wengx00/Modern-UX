@@ -84,5 +84,17 @@ Material UI 并没有提供开箱即用的表单整体控制能力（比如 Ant 
 
 如果你不想使用开箱即用的 `FormItem`，那么也可以使用 `/src/hooks/useFormItem` 中提供的 `useFormItem` hook 自定义一个船新的 FormItem
 
+## 构建产物
+
+Modern.js 的默认构建配置会在 `dist` 目录产生 `html`、`static` 目录，如果是要部署到 nginx 中，推荐进行以下类似的配置：
+
+```
+location / {
+  root /path/to/dist/;
+  index /html/main/index.html;
+  try_files $uri /html/main/index.html;
+}
+```
+
 
 🌟 更多文档正在计划中～ 如遇问题请提 issue

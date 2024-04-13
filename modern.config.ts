@@ -3,12 +3,13 @@ import versionGen from './config/plugin/version-gen'
 
 // https://modernjs.dev/en/configure/app/usage
 export default defineConfig({
-  // output: {
-  //   ssg: true,
-  // },
-  // server: {
-  //   ssr: true,
-  // },
+  output: {
+    ssg: false,
+    polyfill: 'usage',
+  },
+  server: {
+    ssr: false,
+  },
   runtime: {
     router: true,
   },
@@ -31,8 +32,5 @@ export default defineConfig({
       'process.env.MODERN_BASE': process.env.MODERN_BASE,
       'process.env.MODERN_API_BASE': process.env.MODERN_API_BASE,
     },
-  },
-  output: {
-    polyfill: 'ua',
   },
 })
