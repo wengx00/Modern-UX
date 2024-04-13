@@ -26,6 +26,9 @@ export default function Layout() {
       <Provider store={store}>
         <Helmet>
           <title>{`${constants.APP_TITLE}`}</title>
+          <meta name="author" content={`${constants.APP_AUTHOR}`} />
+          <meta name="version" content={`${constants.APP_VERSION}`} />
+          <meta name="description" content={`${constants.APP_DESCRIPTION}`} />
           <link
             rel="icon"
             type="image/x-icon"
