@@ -29,7 +29,12 @@ export type TodoListItem = {
 export type TodoList = TodoListItem[]
 
 export const loader = async () => {
-  return await request({
-    url: '/getTodoList',
-  })
+  try {
+    const res = await request({
+      url: '/getTodoList',
+    })
+    return res
+  } catch {
+    return []
+  }
 }
