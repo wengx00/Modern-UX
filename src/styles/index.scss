@@ -1,0 +1,42 @@
+@use "./theme.scss" as *;
+
+$xs: 390px;
+$sm: 720px;
+$md: 960px;
+$lg: 1080px;
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-center {
+  justify-content: center;
+  align-items: center;
+}
+
+.main-axis-center {
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.cross-axis-center {
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@mixin fill($bgColor: unset) {
+  width: 100%;
+  height: 100%;
+  background-color: $bgColor;
+}
+
+@mixin padding($padding: 1rem) {
+  box-sizing: border-box;
+  padding: $padding;
+}

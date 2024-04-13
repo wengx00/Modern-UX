@@ -1,0 +1,69 @@
+.root {
+    --bg-color: transparent;
+    --color: $grey;
+    @extend .col, .flex-center;
+    @include fill();
+    position: absolute;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    background: var(--bg-color);
+
+    &.overlay {
+        pointer-events: all;
+    }
+}
+
+@keyframes loading {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.2;
+    }
+}
+
+.loadingRoot {
+    position: absolute;
+    @extend .col, .flex-center;
+    top: 10%;
+    --radius: 2rem;
+    --total: 8;
+
+    @media screen and (max-width: $sm) {
+        --radius: 2rem;
+    }
+
+    .loadingWrapper {
+        @extend .col, .flex-center;
+        width: calc(var(--radius) * 2);
+        height: calc(var(--radius) * 2);
+        position: relative;
+
+        em {
+            @include useTheme {
+                backdrop-filter: blur(10px);
+                --offset: 0;
+                position: absolute;
+                width: calc(var(--radius) * 0.12);
+                height: calc(var(--radius) * 0.4);
+                border-radius: var(--radius);
+                background: getVar("textColor");
+                transform: rotate(calc(360deg / var(--total) * var(--offset)))
+                    translateY(calc(var(--radius) * 0.4 * -1));
+                animation: loading calc(var(--total) * 0.1s) linear infinite;
+                animation-delay: calc(0.1s * var(--offset));
+            }
+        }
+
+        &[data-color="custom"] {
+            em {
+                background: var(--color);
+            }
+        }
+    }
+
+    .loadingText {
+        margin-top: 1rem;
+    }
+}
