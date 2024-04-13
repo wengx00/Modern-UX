@@ -18,27 +18,27 @@ pnpm install
 pnpm dev
 ```
 
-Enable optional features or add a new entry:
+开启可选的功能或者新增入口：
 
 ```bash
 pnpm new
 ```
 
-Build the app for production:
+生产环境构建:
 
 ```bash
 pnpm build
 ```
 
-Preview the production build locally:
+本地预览生产环境产物：
 
 ```bash
 pnpm serve
 ```
 
-For more information, see the [Modern.js documentation](https://modernjs.dev/en).
+更多信息详见：[Modern.js documentation](https://modernjs.dev/en).
 
-## Introduction
+## 介绍
 
 - 基于字节跳动 Web Infra 开源的 modern.js Web 工程体系解决方案
 
