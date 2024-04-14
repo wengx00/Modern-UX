@@ -42,6 +42,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           # 给清单打上多个标签
           tags: |
-            modern-ux:${{ steps.date.outputs.timestamp }}
-            modern-ux:latest
+            ccweng/modern-ux:${{ steps.date.outputs.timestamp }}
+            ccweng/modern-ux:latest
 
