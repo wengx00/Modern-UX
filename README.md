@@ -111,7 +111,13 @@ location / {
 
 2. 流水线构建
 
-   🚧 施工中
+   目前仓库已经基于 Github Actions 实现了自动化流水线 CI，即自动将 master 分支的 push / PR 打包 📦 构建为 Docker Image 并提交到 Docker Hub 中。
+
+   你可以 fork 该仓库，然后修改 `.github/workflows/ci.yml` 中的配置（改为自己的 Docker Hub Repo 或者私有的 Docker 镜像服务），同时在 Github 仓库的 Secrets 中配置 Docker Hub 的账号密码等信息，这样就可以实现和本仓库类似的 CI 能力了。
+
+   当然，你也可以 remake 整个 CI 配置，按照自己的需求进行配置，比如：自动化部署到 Tencent TKE 中 / 部署到 AWS 云服务中等等...
+
+
 
 
 🌟 更多文档正在计划中～ 如遇问题请提 issue
