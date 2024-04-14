@@ -8,7 +8,8 @@ export default defineConfig({
     polyfill: 'usage',
   },
   server: {
-    ssr: false,
+    ssr: true,
+    port: 8080,
   },
   runtime: {
     router: true,
