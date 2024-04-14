@@ -1,9 +1,9 @@
 @use "./theme.scss" as *;
 
-$xs: 390px;
-$sm: 720px;
-$md: 960px;
-$lg: 1080px;
+$xs: 480px;
+$sm: 768px;
+$md: 834px;
+$lg: 1024px;
 
 .row {
   display: flex;
