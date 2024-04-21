@@ -6,6 +6,7 @@ export type FormItemProtocol = {
   error?: boolean
   value: any
   setState: (v: any) => any
+  triggerValidate: (key: string, trigger: 'blur' | 'submit') => string[]
 }
 
 export function useFormItem(key: string) {
@@ -35,6 +36,7 @@ export function useFormItem(key: string) {
     value: context.state.value[key],
     error: context.state.error[key],
     helperText: context.state.helperText[key],
+    triggerValidate: context.triggerValidate,
     setState,
   } as FormItemProtocol
 }

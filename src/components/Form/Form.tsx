@@ -40,57 +40,72 @@ function FormRaw(props: FormProps, ref: Ref<any>) {
   )
 
   function validate() {
-    const { current } = controller
     const errMessages: string[] = []
-    Object.entries(props.rules || {}).forEach(([key, rule]) => {
+    Object.keys(props.rules || {}).forEach(key => {
+      errMessages.push(...checkItem(key, 'submit'))
+    })
+    return errMessages
+  }
+
+  function checkItem(key: string, timer: 'blur' | 'submit') {
+    const target = props.rules?.[key]
+    const errMessages: string[] = []
+    if (!target) {
+      return errMessages
+    }
+    const { current } = controller
+    const rules = Array.isArray(target) ? target : [target]
+    rules.forEach(r => {
+      if (timer !== 'submit' && r.trigger && r.trigger !== timer) {
+        return
+      }
       const value =
         current.state.value[key] === undefined ||
         current.state.value[key] === null
           ? current.state.value[key]
           : String(current.state.value[key])
-      const rules = Array.isArray(rule) ? rule : [rule]
-      rules.forEach(r => {
-        if (r.required && !value) {
-          controller.current.setState({
-            error: {
-              ...current.state.error,
-              [key]: true,
-            },
-            helperText: {
-              ...current.state.helperText,
-              [key]: r.message ?? `${key}校验不通过`,
-            },
-          })
-          errMessages.push(r.message ?? `${key}校验不通过`)
-        } else if (r.pattern && !r.pattern.test(value)) {
-          controller.current.setState({
-            error: {
-              ...current.state.error,
-              [key]: true,
-            },
-            helperText: {
-              ...current.state.helperText,
-              [key]: r.message ?? `${key}校验不通过`,
-            },
-          })
-          errMessages.push(r.message ?? `${key}校验不通过`)
-        } else {
-          // 清空状态
-          controller.current.setState({
-            error: {
-              ...current.state.error,
-              [key]: false,
-            },
-            helperText: {
-              ...current.state.helperText,
-              [key]: '',
-            },
-          })
-        }
-      })
+      if (r.required && !value) {
+        current.setState({
+          error: {
+            ...current.state.error,
+            [key]: true,
+          },
+          helperText: {
+            ...current.state.helperText,
+            [key]: r.message ?? `${key}校验不通过`,
+          },
+        })
+        errMessages.push(r.message ?? `${key}校验不通过`)
+      } else if (r.pattern && !r.pattern.test(value)) {
+        controller.current.setState({
+          error: {
+            ...current.state.error,
+            [key]: true,
+          },
+          helperText: {
+            ...current.state.helperText,
+            [key]: r.message ?? `${key}校验不通过`,
+          },
+        })
+        errMessages.push(r.message ?? `${key}校验不通过`)
+      } else {
+        // 清空状态
+        controller.current.setState({
+          error: {
+            ...current.state.error,
+            [key]: false,
+          },
+          helperText: {
+            ...current.state.helperText,
+            [key]: '',
+          },
+        })
+      }
     })
     return errMessages
   }
+
+  controller.current.triggerValidate = checkItem
 
   useImperativeHandle<any, FormRef>(ref, () => ({
     validate,

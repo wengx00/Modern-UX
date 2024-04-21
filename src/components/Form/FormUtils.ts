@@ -72,6 +72,10 @@ export class FormStore<T extends Record<string, any>> {
     this.globalDeps.forEach(callback => callback({ ...current }))
     this._state = current
   }
+
+  triggerValidate(_key: string, _timer: 'blur' | 'submit'): string[] {
+    return []
+  }
 }
 
 export const FormContext = createContext(new FormStore<FormControlProtocol>())

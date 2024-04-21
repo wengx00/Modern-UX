@@ -1,4 +1,4 @@
-import { Stack, Typography } from '@mui/material'
+import { Stack } from '@mui/material'
 import {
   ChangeEvent,
   ReactElement,
@@ -7,6 +7,7 @@ import {
   forwardRef,
   useMemo,
 } from 'react'
+import { FormLabel } from './FormLabel'
 import { useFormItem } from '@/hooks/useFormItem'
 
 export type FormItemProps = {
@@ -47,11 +48,16 @@ function FormItemRaw(props: FormItemProps, ref: Ref<any>) {
     controller.setState(value)
   }
 
+  const onBlurDelegate = () => {
+    controller.triggerValidate(props.name, 'blur')
+  }
+
   const memoChildren = useMemo(
     () =>
       props.children &&
       cloneElement(props.children, {
         onChange: onChangeDelegate,
+        onBlur: onBlurDelegate,
         ref,
         value: controller.value ?? '',
         error: controller.error ?? false,
@@ -62,18 +68,7 @@ function FormItemRaw(props: FormItemProps, ref: Ref<any>) {
 
   return (
     <Stack direction={direction} spacing={props.spacing ?? 1} width="100%">
-      {Boolean(props.label) && (
-        <Typography
-          sx={{
-            flexGrow: 1,
-            flexShrink: 0,
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-          }}
-        >
-          {props.label}
-        </Typography>
-      )}
+      {props.label && <FormLabel label={props.label} />}
       {memoChildren}
     </Stack>
   )
